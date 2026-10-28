@@ -10,6 +10,8 @@ builder.Services.AddDbContext<VentasDbContext>(options =>
 
 builder.Services.AddScoped<ClienteService>();
 builder.Services.AddScoped<ProductoService>();
+builder.Services.AddScoped<VentaService>();
+builder.Services.AddScoped<DashboardService>();
 
 builder.Services.AddControllers();
 

@@ -79,7 +79,8 @@ public class ProductoService(VentasDbContext db)
         producto.StockMinimo = dto.StockMinimo;
     }
 
-    private static ProductoDto ADto(Producto p) =>
+    // Pública porque DashboardService la reutiliza para la lista de stock bajo.
+    public static ProductoDto ADto(Producto p) =>
         new(p.Id, p.Codigo, p.Nombre, p.Descripcion, p.Precio, p.Stock, p.StockMinimo, p.Stock <= p.StockMinimo, p.FechaCreacion);
 
     private static NotFoundException NoEncontrado(int id) => new($"No existe un producto con Id {id}.");
