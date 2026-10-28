@@ -86,7 +86,8 @@
   align-items: center;
   gap: 0.6rem;
   font-weight: 700;
-  font-size: 1.1rem;
+  font-size: 1rem;
+  white-space: nowrap;
   color: var(--color-texto);
   text-decoration: none;
 }
@@ -227,6 +228,12 @@
   margin: 0;
   font-size: 0.875rem;
   color: var(--color-texto-suave);
+}
+
+/* Chart.js necesita un contenedor con alto fijo cuando maintainAspectRatio es false. */
+.grafico-contenedor {
+  position: relative;
+  height: 300px;
 }
 
 /* ===== Tablas ===== */

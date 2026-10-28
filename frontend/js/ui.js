@@ -1,8 +1,8 @@
 // Utilidades de interfaz compartidas: barra lateral, toasts, confirmación y formatos.
 // Depende de window.bootstrap (bootstrap.bundle.min.js se carga antes que los módulos).
 
-const LOCALE = 'es-PE';
-const MONEDA = 'PEN';
+export const LOCALE = 'es-PE';
+export const MONEDA = 'PEN';
 
 const PAGINAS = [
   { archivo: 'index.html', texto: 'Dashboard', icono: 'bi-speedometer2' },
