@@ -9,6 +9,7 @@ builder.Services.AddDbContext<VentasDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("VentasDB")));
 
 builder.Services.AddScoped<ClienteService>();
+builder.Services.AddScoped<ProductoService>();
 
 builder.Services.AddControllers();
 
