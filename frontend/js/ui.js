@@ -129,6 +129,70 @@ export function confirmar(mensaje, { titulo = 'Confirmar acción', textoBoton = 
   });
 }
 
+// ===== Formularios =====
+// Las reglas viven en el HTML (required, pattern, min, maxlength...) y replican las Data Annotations del backend.
+// Cada control va junto a su .invalid-feedback dentro del mismo contenedor.
+
+function feedbackDe(control) {
+  return control.parentElement?.querySelector('.invalid-feedback');
+}
+
+function restaurarMensaje(control) {
+  const feedback = feedbackDe(control);
+  if (feedback?.dataset.original) feedback.textContent = feedback.dataset.original;
+}
+
+/** Al escribir en un campo se borra el error que haya marcado el servidor en ese campo. */
+export function prepararFormulario(form) {
+  form.addEventListener('input', (e) => {
+    e.target.setCustomValidity?.('');
+    restaurarMensaje(e.target);
+  });
+}
+
+/** Vacía el formulario y quita los estilos de validación. */
+export function reiniciarFormulario(form) {
+  form.reset();
+  form.classList.remove('was-validated');
+  for (const control of form.elements) {
+    control.setCustomValidity?.('');
+    restaurarMensaje(control);
+  }
+}
+
+/** Recorta espacios, valida con las reglas HTML5 y muestra los mensajes de Bootstrap. */
+export function validarFormulario(form) {
+  for (const control of form.elements) {
+    if (control.type === 'text' || control.type === 'email' || control.type === 'tel' || control.tagName === 'TEXTAREA') {
+      control.value = control.value.trim();
+    }
+  }
+  form.classList.add('was-validated');
+  return form.checkValidity();
+}
+
+/**
+ * Muestra bajo cada campo los errores 400 de la API ({ Correo: ['...'] }).
+ * Devuelve false si ningún error corresponde a un campo del formulario.
+ */
+export function mostrarErroresDeCampo(form, errores) {
+  let alguno = false;
+  for (const [campo, mensajes] of Object.entries(errores ?? {})) {
+    const control = form.elements.namedItem(campo.charAt(0).toLowerCase() + campo.slice(1));
+    if (!control) continue;
+    control.setCustomValidity(mensajes[0]);
+    const feedback = feedbackDe(control);
+    if (feedback) {
+      feedback.dataset.original ??= feedback.textContent;
+      feedback.textContent = mensajes[0];
+    }
+    alguno = true;
+  }
+  form.classList.add('was-validated');
+  return alguno;
+}
+
+// ===== Formatos =====
 const formatoMoneda = new Intl.NumberFormat(LOCALE, { style: 'currency', currency: MONEDA });
 
 /** 1234.5 → "S/ 1,234.50" */

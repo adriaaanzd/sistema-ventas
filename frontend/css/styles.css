@@ -258,15 +258,34 @@
   vertical-align: middle;
 }
 
+/* Botones de editar/eliminar: en fila desde 576 px, apilados en teléfonos. */
+.acciones {
+  display: inline-flex;
+  gap: 0.25rem;
+}
+
+/* En teléfonos, menos relleno y botones apilados para que la tabla quepa sin desplazarse. */
+@media (max-width: 575.98px) {
+  .tabla td,
+  .tabla th {
+    padding: 0.5rem;
+  }
+
+  .acciones {
+    flex-direction: column;
+  }
+}
+
 .tabla .numero {
   text-align: right;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
 
+/* Crece hasta 320 px y deja espacio al botón de la misma fila; en móvil baja y ocupa el ancho. */
 .buscador {
+  flex: 1 1 220px;
   max-width: 320px;
-  width: 100%;
 }
 
 /* ===== Insignias de estado ===== */
