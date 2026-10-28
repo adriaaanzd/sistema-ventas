@@ -1,11 +1,14 @@
 using Microsoft.EntityFrameworkCore;
 using SistemaVentas.Api.Data;
 using SistemaVentas.Api.Errors;
+using SistemaVentas.Api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<VentasDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("VentasDB")));
+
+builder.Services.AddScoped<ClienteService>();
 
 builder.Services.AddControllers();
 
