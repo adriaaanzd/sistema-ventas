@@ -13,6 +13,9 @@
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.14" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="10.3.1" />
+    <!-- Microsoft.Data.SqlClient 6.1.7 trae Pkcs 9.0.11 (CVE-2026-84008, CVE-2026-70162); se fija la versión parcheada.
+         Quitar cuando EF Core/SqlClient la incluyan por defecto (verificar con "dotnet list package" y la opción vulnerable). -->
+    <PackageReference Include="System.Security.Cryptography.Pkcs" Version="10.0.14" />
   </ItemGroup>
 
 </Project>
