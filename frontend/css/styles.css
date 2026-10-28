@@ -237,6 +237,11 @@
 }
 
 /* ===== Tablas ===== */
+/* Solo se desplazan en horizontal; sin esto, un alto con decimales (251.2px) muestra una barra vertical. */
+.table-responsive {
+  overflow-y: hidden;
+}
+
 .tabla {
   margin: 0;
   --bs-table-bg: transparent;
@@ -286,6 +291,13 @@
 .buscador {
   flex: 1 1 220px;
   max-width: 320px;
+}
+
+/* Campo de cantidad dentro de la tabla del carrito. */
+.input-cantidad {
+  width: 4.5rem;
+  margin-left: auto;
+  text-align: right;
 }
 
 /* ===== Insignias de estado ===== */
